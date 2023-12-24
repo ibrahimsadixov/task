@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            background-color: blue;
+            gap: 5px;
+            overflow: hidden;
+        }
+
+        .whiteLetter {
+            color: white;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            font-size: 24px;
+            word-break: break-all;
+            flex-wrap: wrap;
+            height: auto;
+            justify-content: center;
+        }
+
+        p {
+            height: auto;
+            font-size: 24px;
+        }
+
+
+     
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+
+    <script>
+        const container = document.querySelector(".container");
+        let word = "YENİİL";
+
+        let arr = [];
+
+        const screenWidth = window.innerWidth;
+
+        const wordsPerLine = Math.ceil(screenWidth / (word.length * 14.4));
+
+        for (let j = 0; j < window.innerHeight/10; j++) {
+            arr = [];
+            let repeatedWord = "";
+
+            for (let i = 0; i < wordsPerLine; i++) {
+                repeatedWord += word;
+            }
+
+            arr.push(repeatedWord);
+
+            const row = document.createElement("div");
+            row.classList.add("row");
+
+            arr.forEach((repeatedWord) => {
+                for (let i = 0; i < repeatedWord.length; i++) {
+                    const letter = document.createElement('p');
+                    letter.innerText = repeatedWord[i];
+
+                    if (
+                        i >= Math.floor(repeatedWord.length / 2) - j &&
+                        i <= Math.floor(repeatedWord.length / 2) + j
+                    ) {
+                        letter.classList.add('whiteLetter');
+                    }
+
+                    row.appendChild(letter);
+                }
+            });
+
+            container.appendChild(row);
+        }
+    </script>
+
+</body>
+
+</html>
